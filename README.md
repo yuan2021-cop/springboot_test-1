@@ -15,3 +15,8 @@ Run
 
 `./gradlew bootRun` or from IDE's run command (Grandle task)
 
+Checks
+=====
+* `http://localhost:8080`
+* `http://localhost:8080/actuator/health`
+
