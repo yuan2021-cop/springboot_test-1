@@ -11,5 +11,4 @@ public class HelloWordController {
         return "Hello word!";
     }
 
-
 }
