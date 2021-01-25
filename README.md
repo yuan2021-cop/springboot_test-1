@@ -1,7 +1,8 @@
 About
 =====
 
-The simplest Web Application with Spring Boot
+The simplest Web Application to Post Message to file
+and to store the history of already posted messages
 
 Requirement 
 ============
@@ -17,6 +18,12 @@ Run
 
 Checks
 =====
+Post message
 * `http://localhost:8080`
+
+View history
+* `http://localhost:8080/history`
+
+Health check  
 * `http://localhost:8080/actuator/health`
 

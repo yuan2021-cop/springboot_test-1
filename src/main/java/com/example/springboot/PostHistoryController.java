@@ -1,5 +1,6 @@
 package com.example.springboot;
 
+import com.example.utils.PostLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ public class PostHistoryController {
         System.out.println(inputTest);
         String pathToLoggFile = env.getProperty("post.log.file");
         System.out.println(pathToLoggFile);
+        PostLogger pl = new PostLogger(pathToLoggFile);
+        pl.writeLine(inputTest);
         return "index";
     }
 
@@ -33,6 +36,9 @@ public class PostHistoryController {
     public String getHistoryString(Model model) {
         String pathToLoggFile = env.getProperty("post.log.file");
         System.out.println(pathToLoggFile);
+        PostLogger pl = new PostLogger(pathToLoggFile);
+        String history = pl.readHistory();
+        model.addAttribute("history",history);
         model.addAttribute("newLineChar", '\n');
         return "history";
     }
