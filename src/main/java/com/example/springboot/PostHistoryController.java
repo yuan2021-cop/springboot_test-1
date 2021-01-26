@@ -35,7 +35,6 @@ public class PostHistoryController {
     @RequestMapping(value = "/history")
     public String getHistoryString(Model model) {
         String pathToLoggFile = env.getProperty("post.log.file");
-        System.out.println(pathToLoggFile);
         PostLogger pl = new PostLogger(pathToLoggFile);
         String history = pl.readHistory();
         model.addAttribute("history",history);

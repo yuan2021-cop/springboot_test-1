@@ -5,7 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Scanner;
+import java.util.ArrayDeque;
+import java.util.Iterator;
 
 public class PostLogger {
     private String filePath;
@@ -36,10 +37,27 @@ public class PostLogger {
     }
 
     public String readHistory(){
-        String content = null;
+        String content = "";
+        ArrayDeque<String> stack = new ArrayDeque<String>();
         try {
-            content = new Scanner(new File(filePath)).useDelimiter("\\Z").next();
-        } catch (FileNotFoundException e) {
+            File file = new File(filePath);
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
+            //read the file and add only not an empty string to the stack
+            String line = reader.readLine();
+            while (line != null) {
+                if (line.trim().length() > 0)
+                    stack.push(line.trim());
+                line = reader.readLine();
+            }
+            reader.close();
+            fr.close();
+            //add posts to the content in inverse order
+            Iterator<String> it = stack.iterator();
+            while (it.hasNext()) {
+                content += it.next() +"\n";
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println(content);
