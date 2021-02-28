@@ -64,4 +64,32 @@ public class PostLogger {
         return content;
     }
 
+    public boolean deleteString(String toDelete){
+		String tmpPath = filePath+".tmp";
+		try {
+			File file1 = new File(filePath);
+			FileReader fr1 = new FileReader(file1);
+			BufferedReader r1 = new BufferedReader(fr1);
+
+			File file2 = new File(tmpPath);
+			FileWriter fr2 = new FileWriter(file2);
+			BufferedWriter r2 = new BufferedWriter(fr2);
+
+			String line = r1.readLine();
+			while (line != null) {
+				String trimmedLine = line.trim();
+				String toDeleteTrimmed = toDelete.trim();
+				if (trimmedLine.length() > 0 && !toDeleteTrimmed.equals(trimmedLine)) {
+					r2.write(line+System.lineSeparator());
+                }
+				line = r1.readLine();
+			}
+			r1.close();	r2.close();
+			fr1.close(); fr2.close();
+			return file2.renameTo(file1);
+    	} catch (IOException e) {
+			e.printStackTrace();
+            return false;
+		}
+    }
 }

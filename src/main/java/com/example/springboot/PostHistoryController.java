@@ -42,5 +42,18 @@ public class PostHistoryController {
         return "history";
     }
 
+    @RequestMapping(value = "/delete")
+    public String deleteString(@RequestParam("delete_input_text") String deleteText, 
+    				Model model) {
+	   model.addAttribute("title", "Delete Page");
+	   System.out.println(deleteText);
+	   String pathToLogFile = env.getProperty("post.log.file");
+	   PostLogger pl = new PostLogger(pathToLogFile);
+        System.out.println(pathToLogFile);
+	   boolean deleted = pl.deleteString(deleteText);
+       model.addAttribute("deleted", deleted);
+	   return "delete";
+    }
+
 }
 
