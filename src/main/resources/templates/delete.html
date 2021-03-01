@@ -20,7 +20,7 @@
           aria-label="delete from the locat file">
         <div class="delete_input">
             <span class="delete_span">
-                    <input class="input_control" tabindex="2" spellcheck="false" aria-label="delete" id="text" maxlength="400" name="delete_input_text"></span>
+                    <input class="input_control" tabindex="2" spellcheck="false" aria-label="delete" id="text" maxlength="400" name="post_text"></span>
             </span>
         </div>
         <div class="delete_button">
@@ -32,10 +32,10 @@
           <p class="tab">
             <th:block th:if="${deleteAttempted}">
               <th:block th:if="${deleted}">
-                <th:block th:text="Deleted"/>
+                <th:block>The requested post has been deleted from history.</th:block>
               </th:block>
               <th:block th:unless="${deleted}">
-                <th:block th:text="Not_deleted"/>
+                <th:block>The requested post does not exist in the history.</th:block>
               </th:block>
             </th:block>
           </p>

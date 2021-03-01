@@ -22,10 +22,8 @@ public class PostHistoryController {
     @RequestMapping(value = "/api")
     public String postString(@RequestParam("post_input_text") String inputTest,
                              Model model) {
-	System.out.println("I am here");
         model.addAttribute("title","Post Page");
         System.out.println(inputTest);
-	System.out.println("text printed above");
         String pathToLoggFile = env.getProperty("post.log.file");
         System.out.println(pathToLoggFile);
         PostLogger pl = new PostLogger(pathToLoggFile);
@@ -45,18 +43,15 @@ public class PostHistoryController {
     }
 
     @RequestMapping(value = "/delete")
-    public String deleteString(@RequestParam("delete_input_text") String deleteText, 
+    public String deletePost(@RequestParam("post_text") String deleteText, 
     				Model model) {
 	   	model.addAttribute("title", "Delete Page");
-	   	System.out.println(deleteText);
 	   	String pathToLogFile = env.getProperty("post.log.file");
 	   	PostLogger pl = new PostLogger(pathToLogFile);
-        	System.out.println(pathToLogFile);
 	   	boolean deleted = pl.deleteString(deleteText);
-       		model.addAttribute("deleted", deleted);
+       	model.addAttribute("deleted", deleted);
 		if (!deleteText.isEmpty()) model.addAttribute("deleteAttempted", true);
-	   System.out.println("deleted: " + deleted);
-	   return "delete";
+        return "delete";
     }
 
 }
