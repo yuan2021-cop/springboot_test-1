@@ -65,8 +65,10 @@ public class PostLogger {
     }
 
     public boolean deleteString(String toDelete){
+    		boolean delete = false;
 		String tmpPath = filePath+".tmp";
 		try {
+			
 			File file1 = new File(filePath);
 			FileReader fr1 = new FileReader(file1);
 			BufferedReader r1 = new BufferedReader(fr1);
@@ -81,12 +83,13 @@ public class PostLogger {
 				String toDeleteTrimmed = toDelete.trim();
 				if (trimmedLine.length() > 0 && !toDeleteTrimmed.equals(trimmedLine)) {
 					r2.write(line+System.lineSeparator());
-                }
+                		}
+				else delete = true;
 				line = r1.readLine();
 			}
 			r1.close();	r2.close();
-			fr1.close(); fr2.close();
-			return file2.renameTo(file1);
+			fr1.close();	fr2.close();
+			return (delete && file2.renameTo(file1));
     	} catch (IOException e) {
 			e.printStackTrace();
             return false;

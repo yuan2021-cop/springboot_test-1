@@ -29,15 +29,17 @@
             </button>
         </div>
         <div class="layer1">
-        <p class="tab">
-        <div th:if="${deleted}">
-              <div> OK</div>
-            </div>
-          <div th:unless="${deleted}">
-              <div> NOT OK</div>
-          </div>
+          <p class="tab">
+            <th:block th:if="${deleteAttempted}">
+              <th:block th:if="${deleted}">
+                <th:block th:text="Deleted"/>
+              </th:block>
+              <th:block th:unless="${deleted}">
+                <th:block th:text="Not_deleted"/>
+              </th:block>
+            </th:block>
+          </p>
         </div>
-        </p>
     </div>
     </form>
 </td>
