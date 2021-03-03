@@ -42,5 +42,17 @@ public class PostHistoryController {
         return "history";
     }
 
+    @RequestMapping(value = "/delete")
+    public String deletePost(@RequestParam("post_text") String deleteText, 
+    				Model model) {
+	   	model.addAttribute("title", "Delete Page");
+	   	String pathToLogFile = env.getProperty("post.log.file");
+	   	PostLogger pl = new PostLogger(pathToLogFile);
+	   	boolean deleted = pl.deleteString(deleteText);
+       	model.addAttribute("deleted", deleted);
+		if (!deleteText.isEmpty()) model.addAttribute("deleteAttempted", true);
+        return "delete";
+    }
+
 }
 
