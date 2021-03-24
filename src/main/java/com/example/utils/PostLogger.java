@@ -78,7 +78,7 @@ public class PostLogger {
 			while (line != null) {
 				String trimmedLine = line.trim();
 				String toDeleteTrimmed = toDelete.trim();
-				if (trimmedLine.length() > 0 && !toDeleteTrimmed.equals(trimmedLine)) {
+				if (line.isEmpty() || !toDeleteTrimmed.equals(trimmedLine)) {
 					r2.write(line+System.lineSeparator());
                 }
 				else delete = true;
